@@ -1,0 +1,37 @@
+idf_component_register(
+    SRCS
+        mobile_app/mobile_app_handlers.c
+        bluetooth/bluetooth.c
+        telescope/telescope_tracking.c
+        telescope/telescope_coordinates.c
+        telescope/telescope_datetime.c
+        telescope/telescope_alignment.c
+        telescope/telescope_goto.c
+        telescope/telescope_other.c
+        config/hw_config.c
+        config/sw_config.c
+        joystick/app_joystick.c
+        joystick/analog_joystick.c
+        telescope/telescope_stepper.c
+        main.c
+        main_helpers.c
+        telescope/astronomy_engine.c
+        display/display.c
+        trace/trace_conf.c
+        flash/flash.c
+        flash/flash_settings.c
+        mobile_app/mobile_app_command_buffer.c
+        mobile_app/mobile_app_parser.c
+        mobile_app/mobile_app_dispatch.c
+    INCLUDE_DIRS
+        .
+        config
+        trace
+        flash
+    REQUIRES
+        bt
+        driver
+        nvs_flash
+        esp_adc
+        ssd1306
+)

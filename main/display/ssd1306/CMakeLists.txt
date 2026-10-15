@@ -1,0 +1,26 @@
+# Copyright (c) 2022 nopnop2002
+# SPDX-License-Identifier: MIT
+#
+# Source: https://github.com/nopnop2002/esp-idf-ssd1306/tree/master/components/ssd1306
+# See LICENSE for the full MIT license and NOTICE.md for component attribution.
+
+set(component_srcs "ssd1306.c" "ssd1306_spi.c")
+
+# get IDF version for comparison
+set(idf_version "${IDF_VERSION_MAJOR}.${IDF_VERSION_MINOR}")
+
+if(idf_version VERSION_GREATER_EQUAL "5.2")
+	if(CONFIG_LEGACY_DRIVER)
+		list(APPEND component_srcs "ssd1306_i2c_legacy.c")
+	else()
+		list(APPEND component_srcs "ssd1306_i2c_new.c")
+	endif()
+else()
+	list(APPEND component_srcs "ssd1306_i2c_legacy.c")
+endif()
+
+idf_component_register(
+    SRCS "${component_srcs}"
+    PRIV_REQUIRES driver esp_adc
+    INCLUDE_DIRS "." "../.." "../../config"
+)
